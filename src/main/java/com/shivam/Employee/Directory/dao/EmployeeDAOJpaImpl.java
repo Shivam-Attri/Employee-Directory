@@ -31,19 +31,12 @@ public class EmployeeDAOJpaImpl  implements EmployeeDAO{
     }
 
     @Override
-    @Transactional
-    public void save(Employee employee) {
-        entityManager.persist(employee);
+    public Employee saveOrUpdate(Employee employee) {
+       Employee dbEmployee= entityManager.merge(employee);
+       return dbEmployee;
     }
 
     @Override
-    @Transactional
-    public void update(Employee employee) {
-        //TDB
-    }
-
-    @Override
-    @Transactional
     public void delete(int id) {
         entityManager.remove(findById(id));
     }

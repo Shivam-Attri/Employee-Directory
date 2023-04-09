@@ -2,6 +2,7 @@ package com.shivam.Employee.Directory.service;
 
 import com.shivam.Employee.Directory.dao.EmployeeDAO;
 import com.shivam.Employee.Directory.entity.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void save(Employee employee) {
-        employeeDAO.save(employee);
+    @Transactional
+    public Employee saveOrUpdate(Employee employee) {
+        return employeeDAO.saveOrUpdate(employee);
     }
 
     @Override
-    public void update(Employee employee) {
-        employeeDAO.update(employee);
-    }
-
-    @Override
+    @Transactional
     public void delete(int id) {
         employeeDAO.delete(id);
     }
